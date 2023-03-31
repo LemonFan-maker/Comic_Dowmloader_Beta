@@ -15,15 +15,16 @@ headers = {
 }
 
 os.mkdir('temp')
+os.mkdir('temp/new')
 
 # 保存html到本地解析
-get_manga_chapterlist(url=urls, headers=headers)
+get_manga_chapterlist(url=urls, headers=headers, dest='./temp')
 
 # 获取漫画名称并创建文件夹
 name = get_manga_name()
 
 # 获取章节目录
-get_chapterlist()
+get_chapterlist(dest='./temp')
 
 # 创建csv文件
 make_csv('./temp/chapter.lst', './temp/chapter_name.lst', './temp/combine.csv')
@@ -91,26 +92,5 @@ for i in list:
         print('ERRRRRR!')
         download(i)
 
-# def download_in_threads(url_list, num_threads):
-#     # 创建一个线程池
-#     thread_pool = []
-#     for i in range(num_threads):
-#         thread_pool.append(threading.Thread())
-
-#     # 将地址列表分成若干个块
-#     chunk_size = len(url_list) // num_threads + 1
-#     url_chunks = [url_list[i:i+chunk_size] for i in range(0, len(url_list), chunk_size)]
-
-#     # 启动线程，将每个块中的地址传给下载函数
-#     for i in range(num_threads):
-#         thread_pool[i] = threading.Thread(target=lambda urls: [download(url) for url in urls], args=(url_chunks[i],))
-#         thread_pool[i].start()
-
-#     # 等待所有线程执行完毕
-#     for i in range(num_threads):
-#         thread_pool[i].join()
-
-# download_in_threads(url_list=list, num_threads=int(os.cpu_count()*4))
-
 print('下载完成!')
-shutil.rmtree('temp')
+# shutil.rmtree('temp')

@@ -10,7 +10,6 @@ def read_files_in_folder(folder):
             "user-agent": UserAgent().random
         }
         
-
 def run_threads_on_folders():
     with open('./temp/dir_files.lst', 'r', encoding='utf-8') as f:
         data = f.readlines()

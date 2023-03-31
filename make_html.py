@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
-def get_manga_chapterlist(headers, url):
+
+def get_manga_chapterlist(headers, url, dest):
     url_data = url.replace("manga", "chapterlist")
 
     url_data = requests.get(url_data, headers).text
@@ -11,10 +12,13 @@ def get_manga_chapterlist(headers, url):
     soup2 = bs(url_data2, 'lxml')
     data2 = soup2.prettify()
 
-    with open('./temp/chapterlist_page.html', 'w', encoding='utf-8') as f:
+    chapter_list = dest + '/chapterlist_page.html'
+    origin_list = dest + '/origin_page.html'
+
+    with open(chapter_list, 'w', encoding='utf-8') as f:
         f.write(data)
     f.close()
     
-    with open('./temp/origin_page.html', 'w', encoding='utf-8') as g:
+    with open(origin_list, 'w', encoding='utf-8') as g:
         g.write(data2)
     g.close()
